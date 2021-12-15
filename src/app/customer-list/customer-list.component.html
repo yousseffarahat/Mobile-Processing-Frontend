@@ -1,0 +1,47 @@
+<div class="customer-list-header">
+  <h2 class="customer-list-title">Customer Phone Directory</h2>
+</div>
+<div class="container list-alignment" id="main-div">
+  <mat-form-field id="filter" appearance="standard">
+    <mat-label>Search</mat-label>
+    <input id="customer-list-filterInput" matInput (keyup)="applyFilter($event)" #input>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+
+      <table mat-table id="customer-list-table" [dataSource]="customersSource" matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="full-table-header">Name</th>
+        <td mat-cell id="customer-list-name" *matCellDef="let customer"> {{customer.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="full-table-header">Phone</th>
+        <td mat-cell id="customer-list-phone" *matCellDef="let customer"> {{customer.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="full-table-header">Country</th>
+        <td mat-cell id="customer-list-country" *matCellDef="let customer"> {{customer.country}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="countryCode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="full-table-header">Country Code</th>
+        <td mat-cell id="customer-list-countryCode" *matCellDef="let customer"> {{customer.countryCode}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="valid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="full-table-header">State</th>
+        <td mat-cell id="customer-list-valid" *matCellDef="let customer">
+          <mat-checkbox class="example-margin" [(ngModel)]="customer.state" [disabled]="true"></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator id="customer-list-paginator"
+                   [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  </div>
+</div>
